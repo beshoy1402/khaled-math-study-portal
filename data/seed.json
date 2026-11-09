@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "classes": ["G12A", "G12B", "G12C", "G12D"],
+  "users": [
+    {"id":"teacher-1","username":"teacher","password":"math123","role":"teacher","name":"Mr Khaled","class":"All"},
+    {"id":"student-1","username":"student1","password":"study123","role":"student","name":"Demo Student One","class":"G12A"},
+    {"id":"student-2","username":"student2","password":"study123","role":"student","name":"Demo Student Two","class":"G12B"}
+  ],
+  "materials": [
+    {"id":"mat-1","title":"Welcome to the study portal","type":"Lesson","class":"All","topic":"Getting started","description":"Your class materials and revision resources will be shared here.","url":"https://drive.google.com/","createdAt":"2026-11-09"}
+  ],
+  "tasks": [
+    {"id":"task-1","title":"Complete the assigned practice","description":"Review the latest lesson and solve the practice questions.","class":"G12A","studentId":"student-1","dueDate":"2026-11-12","status":"Pending"}
+  ],
+  "quizzes": [
+    {"id":"quiz-1","title":"Weekly calculus quiz","class":"G12A","date":"2026-11-14","topics":"Limits, continuity and derivatives","materialIds":["mat-1"]}
+  ],
+  "announcements": [
+    {"id":"ann-1","title":"Welcome","body":"Check your dashboard regularly for new homework, materials and quiz dates.","class":"All","createdAt":"2026-11-09"}
+  ],
+  "completions": []
+}
