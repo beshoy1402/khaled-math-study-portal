@@ -1,26 +1,39 @@
 # Khaled Math Study Portal
 
-Student and teacher portal prototype for G12A–G12D.
+Live site: https://beshoy1402.github.io/khaled-math-study-portal/
 
-## Demo accounts
-- Teacher: teacher / math123
-- Student: student1 / study123 (G12A)
-- Student: student2 / study123 (G12B)
+GitHub Pages hosts the frontend. Supabase Auth, PostgreSQL, private Storage, Row Level Security and a protected Edge Function power the portal.
+
+## First teacher account — required one-time setup
+No teacher login is pre-created. Do not expose a secret/service-role key or enable public signup.
+
+1. Open https://supabase.com/dashboard/project/apzleaclwhfwqyqcynav
+2. Authentication → Users → Add user → Create new user.
+3. Create a confirmed user with email mrkhaled@khaledmath.portal.invalid and a strong password.
+4. Copy that user's UUID.
+5. In SQL Editor, run the following after replacing the placeholder UUID:
+
+```sql
+update public.profiles
+set role = 'teacher', class_code = null, display_name = 'Mr Khaled', username = 'mrkhaled'
+where id = 'PASTE-USER-UUID-HERE';
+```
+
+6. Sign in to the website with username mrkhaled and the password set above.
+
+The teacher can create students from the Students section. Each student signs in with their own username and password.
 
 ## Features
-- Student dashboard with pending assignments, next quiz, class materials and profile.
-- Teacher dashboard with student account creation, material publishing, assignment creation, quiz scheduling and announcements.
-- Class-specific resources and assignments.
-- Students can mark assignments complete.
-- Responsive mobile navigation and layout.
+- Individual student logins and private profiles.
+- Teacher-only student account creation.
+- Class-specific resources and private uploaded files.
+- Homework with due dates and completion tracking.
+- Quiz schedule and study topics.
+- Class announcements.
+- Responsive mobile navigation.
 
-## Important: demo database limitation
-GitHub Pages only hosts static files. This version stores data in the current browser's localStorage. Data is not shared between students or devices, and demo passwords are not secure. Do not enter real student information or real passwords.
+## Security
+The frontend contains only the Supabase publishable key. RLS protects all portal tables. The service-role/secret key is never stored in GitHub. Uploaded files are in a private bucket and served using expiring signed URLs.
 
-## Production database (later)
-Create a new, separate Firebase project for this portal. Connect Firebase Authentication and Cloud Firestore collections: users, materials, assignments, quizzes, announcements, and completions. Enforce teacher permissions with custom claims and Firestore Security Rules. Never store plaintext passwords in Firestore.
-
-## Publish with GitHub Pages
-In repository Settings > Pages, choose Deploy from a branch, select main and /(root), then save.
-
-Website: https://beshoy1402.github.io/khaled-math-study-portal/
+## Free tier
+This project is intended to stay on Supabase Free. Free-tier quotas and inactivity pausing apply. Do not enable paid add-ons or upgrade billing.
